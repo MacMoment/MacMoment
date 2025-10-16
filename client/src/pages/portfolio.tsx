@@ -15,23 +15,11 @@ const projects: Project[] = [
     subtitle: "Advanced Anti-Cheat System",
     description: "Comprehensive anti-cheat using multi-layered detection, real-time packet analysis, and intelligent behavioral monitoring for game servers.",
     techStack: ["C++", "Assembly", "Networking"],
+    category: "anti-cheat",
     metrics: [
       { label: "Accuracy", value: "99.7%", color: "text-chart-3" },
       { label: "False Positives", value: "<0.1%", color: "text-chart-1" },
       { label: "Detection", value: "Sub-1ms", color: "text-chart-2" },
-    ],
-    featured: true,
-  },
-  {
-    id: "macrefunds",
-    title: "MacRefunds",
-    subtitle: "JDA-Integrated Refund Plugin",
-    description: "A plugin integrated with JDA to issue in-game refunds via Discord or in-game commands, backed by an efficient database for secure transaction logging.",
-    techStack: ["Java", "JDA", "SQL"],
-    metrics: [
-      { label: "Discord", value: "Integration", color: "text-chart-1" },
-      { label: "Database", value: "Secure", color: "text-chart-3" },
-      { label: "API", value: "JDA Powered", color: "text-chart-2" },
     ],
     featured: true,
   },
@@ -41,10 +29,25 @@ const projects: Project[] = [
     subtitle: "Distributed DDoS Mitigation System",
     description: "Real-time distributed denial-of-service protection using machine learning pattern recognition and automated traffic filtering across multiple nodes.",
     techStack: ["Go", "Redis", "TensorFlow", "Docker"],
+    category: "infrastructure",
     metrics: [
       { label: "Uptime", value: "99.99%", color: "text-chart-3" },
       { label: "Traffic/s", value: "1M+", color: "text-chart-1" },
       { label: "Mitigation", value: "<500ms", color: "text-chart-2" },
+    ],
+    featured: true,
+  },
+  {
+    id: "neuralnpc",
+    title: "NeuralNPC",
+    subtitle: "AI-Powered NPC Behavior System",
+    description: "Machine learning-driven NPC behavior engine with dynamic pathfinding, contextual dialogue, and adaptive difficulty scaling for enhanced gameplay.",
+    techStack: ["Python", "PyTorch", "C++", "Rust"],
+    category: "ai",
+    metrics: [
+      { label: "AI Models", value: "15+", color: "text-chart-2" },
+      { label: "Learning", value: "Real-time", color: "text-chart-1" },
+      { label: "Accuracy", value: "94%", color: "text-chart-3" },
     ],
     featured: true,
   },
@@ -54,6 +57,7 @@ const projects: Project[] = [
     subtitle: "Real-time Auction House Plugin",
     description: "Feature-rich auction house system with real-time bidding, category filtering, and automated escrow transactions for Minecraft servers.",
     techStack: ["Java", "MySQL", "Redis", "WebSocket"],
+    category: "plugin",
     metrics: [
       { label: "Concurrent", value: "5K Users", color: "text-chart-1" },
       { label: "Transactions", value: "100K+", color: "text-chart-3" },
@@ -62,15 +66,16 @@ const projects: Project[] = [
     featured: false,
   },
   {
-    id: "neuralnpc",
-    title: "NeuralNPC",
-    subtitle: "AI-Powered NPC Behavior System",
-    description: "Machine learning-driven NPC behavior engine with dynamic pathfinding, contextual dialogue, and adaptive difficulty scaling for enhanced gameplay.",
-    techStack: ["Python", "PyTorch", "C++", "Rust"],
+    id: "macrefunds",
+    title: "MacRefunds",
+    subtitle: "JDA-Integrated Refund Plugin",
+    description: "A plugin integrated with JDA to issue in-game refunds via Discord or in-game commands, backed by an efficient database for secure transaction logging.",
+    techStack: ["Java", "JDA", "SQL"],
+    category: "plugin",
     metrics: [
-      { label: "AI Models", value: "15+", color: "text-chart-2" },
-      { label: "Learning", value: "Real-time", color: "text-chart-1" },
-      { label: "Accuracy", value: "94%", color: "text-chart-3" },
+      { label: "Discord", value: "Integration", color: "text-chart-1" },
+      { label: "Database", value: "Secure", color: "text-chart-3" },
+      { label: "API", value: "JDA Powered", color: "text-chart-2" },
     ],
     featured: false,
   },
@@ -80,6 +85,7 @@ const projects: Project[] = [
     subtitle: "Modern Web Portfolio",
     description: "A stunning, dark-themed portfolio showcasing development skills through implementation. Built with modern web technologies and smooth animations.",
     techStack: ["TypeScript", "React", "Tailwind CSS", "Framer Motion"],
+    category: "web",
     metrics: [
       { label: "Performance", value: "A+", color: "text-chart-3" },
       { label: "Responsive", value: "100%", color: "text-chart-1" },
@@ -307,109 +313,130 @@ export default function Portfolio() {
             </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            {projects.filter(p => p.featured).map((project, index) => (
-              <AnimatedCard key={project.id} index={index}>
-                <Card
-                  className="group relative overflow-hidden border-primary/20 hover:border-primary/50 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 h-full bg-card/50 backdrop-blur-sm"
-                  data-testid={`card-project-${project.id}`}
-                >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-chart-2/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                <div className="relative p-8">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="font-display text-2xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors" data-testid={`text-project-title-${project.id}`}>
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-chart-1 font-medium">{project.subtitle}</p>
-                    </div>
-                    <motion.div 
-                      className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors border border-primary/20"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
+          <div className="mb-16">
+            {projects.filter(p => p.featured).map((project, index) => {
+              const isHero = index === 0;
+              
+              if (isHero) {
+                return (
+                  <AnimatedCard key={project.id} index={index}>
+                    <Card
+                      className="group relative overflow-hidden border-primary/20 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 bg-card/50 backdrop-blur-sm mb-8"
+                      data-testid={`card-project-${project.id}`}
                     >
-                      <Code2 className="w-6 h-6 text-primary" />
-                    </motion.div>
-                  </div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-chart-2/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      
+                      <div className="relative p-8 md:p-12">
+                        <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-4">
+                              <div className="flex-1">
+                                {project.category && (
+                                  <Badge variant="outline" className="mb-3 text-[10px] border-primary/40 text-primary capitalize" data-testid={`badge-category-${project.id}`}>
+                                    {project.category.replace('-', ' ')}
+                                  </Badge>
+                                )}
+                                <h3 className="font-display text-3xl md:text-4xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors" data-testid={`text-project-title-${project.id}`}>
+                                  {project.title}
+                                </h3>
+                                <p className="text-base text-chart-1 font-medium">{project.subtitle}</p>
+                              </div>
+                              <motion.div 
+                                className="p-4 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors border border-primary/20"
+                                whileHover={{ scale: 1.1, rotate: 5 }}
+                              >
+                                <Code2 className="w-7 h-7 text-primary" />
+                              </motion.div>
+                            </div>
 
-                  <p className="text-foreground/80 mb-6 leading-relaxed">
-                    {project.description}
-                  </p>
+                            <p className="text-foreground/80 mb-6 text-lg leading-relaxed">
+                              {project.description}
+                            </p>
 
-                  {project.metrics && (
-                    <div className="grid grid-cols-3 gap-4 mb-6 p-4 bg-background/50 rounded-lg border border-primary/10">
-                      {project.metrics.map((metric, idx) => (
-                        <div key={idx} className="text-center group/metric" data-testid={`metric-${project.id}-${idx}`}>
-                          <div className={`font-mono font-bold text-xl ${metric.color || "text-primary"} group-hover/metric:scale-110 transition-transform`}>
-                            {metric.value}
+                            <div className="flex flex-wrap gap-2 mb-6">
+                              {project.techStack.map((tech, idx) => (
+                                <motion.div
+                                  key={idx}
+                                  initial={{ opacity: 0, scale: 0.8 }}
+                                  whileInView={{ opacity: 1, scale: 1 }}
+                                  transition={{ duration: 0.3, delay: idx * 0.05 }}
+                                  viewport={{ once: true }}
+                                  whileHover={{ scale: 1.05, y: -2 }}
+                                >
+                                  <Badge variant="secondary" className="font-mono text-xs border border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 transition-colors" data-testid={`badge-tech-${project.id}-${idx}`}>
+                                    {tech}
+                                  </Badge>
+                                </motion.div>
+                              ))}
+                            </div>
                           </div>
-                          <div className="text-xs text-muted-foreground mt-1">{metric.label}</div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((tech, idx) => (
-                      <Badge key={idx} variant="secondary" className="font-mono text-xs border border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 transition-colors" data-testid={`badge-tech-${project.id}-${idx}`}>
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -translate-y-16 translate-x-16 group-hover:bg-primary/40 transition-all duration-500 group-hover:scale-150" />
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-chart-2/20 rounded-full blur-2xl translate-y-12 -translate-x-12 group-hover:bg-chart-2/40 transition-all duration-500" />
-                </Card>
-              </AnimatedCard>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 gap-8">
-            {projects.filter(p => !p.featured).map((project, index) => (
-              <AnimatedCard key={project.id} index={index} delay={0.2}>
-                <Card
-                  className="group relative overflow-hidden border-primary/20 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 bg-card/50 backdrop-blur-sm"
-                  data-testid={`card-project-${project.id}`}
-                >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-chart-2/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative p-8">
-                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-3">
-                        <motion.div 
-                          className="p-2 bg-primary/10 rounded-lg border border-primary/20 group-hover:bg-primary/20 transition-colors"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                        >
-                          <Server className="w-5 h-5 text-primary" />
-                        </motion.div>
-                        <div>
-                          <h3 className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors" data-testid={`text-project-title-${project.id}`}>
-                            {project.title}
-                          </h3>
-                          <p className="text-sm text-chart-1">{project.subtitle}</p>
+                          {project.metrics && (
+                            <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-6 p-6 bg-background/50 rounded-lg border border-primary/10 lg:min-w-[200px]">
+                              {project.metrics.map((metric, idx) => (
+                                <div key={idx} className="text-center group/metric" data-testid={`metric-${project.id}-${idx}`}>
+                                  <div className={`font-mono font-bold text-2xl ${metric.color || "text-primary"} group-hover/metric:scale-110 transition-transform`}>
+                                    {metric.value}
+                                  </div>
+                                  <div className="text-xs text-muted-foreground mt-1">{metric.label}</div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       </div>
 
-                      <p className="text-foreground/80 mb-4 leading-relaxed">
-                        {project.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2">
-                        {project.techStack.map((tech, idx) => (
-                          <Badge key={idx} variant="secondary" className="font-mono text-xs border border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 transition-colors" data-testid={`badge-tech-${project.id}-${idx}`}>
-                            {tech}
+                      <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl -translate-y-16 translate-x-16 group-hover:bg-primary/40 transition-all duration-500 group-hover:scale-150" />
+                      <div className="absolute bottom-0 left-0 w-32 h-32 bg-chart-2/20 rounded-full blur-2xl translate-y-12 -translate-x-12 group-hover:bg-chart-2/40 transition-all duration-500" />
+                    </Card>
+                  </AnimatedCard>
+                );
+              }
+              
+              return null;
+            })}
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {projects.filter(p => p.featured).slice(1).map((project, index) => (
+                <AnimatedCard key={project.id} index={index + 1}>
+                  <Card
+                    className="group relative overflow-hidden border-primary/20 hover:border-primary/50 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 h-full bg-card/50 backdrop-blur-sm"
+                    data-testid={`card-project-${project.id}`}
+                  >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-chart-2/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="relative p-8">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex-1">
+                        {project.category && (
+                          <Badge variant="outline" className="mb-3 text-[10px] border-primary/40 text-primary capitalize" data-testid={`badge-category-${project.id}`}>
+                            {project.category.replace('-', ' ')}
                           </Badge>
-                        ))}
+                        )}
+                        <h3 className="font-display text-2xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors" data-testid={`text-project-title-${project.id}`}>
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-chart-1 font-medium">{project.subtitle}</p>
                       </div>
+                      <motion.div 
+                        className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors border border-primary/20"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                      >
+                        <Code2 className="w-6 h-6 text-primary" />
+                      </motion.div>
                     </div>
+
+                    <p className="text-foreground/80 mb-6 leading-relaxed">
+                      {project.description}
+                    </p>
 
                     {project.metrics && (
-                      <div className="flex md:flex-col gap-6 md:gap-4 p-4 bg-background/50 rounded-lg border border-primary/10">
+                      <div className="grid grid-cols-3 gap-4 mb-6 p-4 bg-background/50 rounded-lg border border-primary/10">
                         {project.metrics.map((metric, idx) => (
                           <div key={idx} className="text-center group/metric" data-testid={`metric-${project.id}-${idx}`}>
-                            <div className={`font-mono font-bold text-lg ${metric.color || "text-primary"} group-hover/metric:scale-110 transition-transform`}>
+                            <div className={`font-mono font-bold text-xl ${metric.color || "text-primary"} group-hover/metric:scale-110 transition-transform`}>
                               {metric.value}
                             </div>
                             <div className="text-xs text-muted-foreground mt-1">{metric.label}</div>
@@ -417,9 +444,110 @@ export default function Portfolio() {
                         ))}
                       </div>
                     )}
+
+                    <div className="flex flex-wrap gap-2">
+                      {project.techStack.map((tech, idx) => (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: idx * 0.05 }}
+                          viewport={{ once: true }}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                        >
+                          <Badge variant="secondary" className="font-mono text-xs border border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 transition-colors" data-testid={`badge-tech-${project.id}-${idx}`}>
+                            {tech}
+                          </Badge>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </Card>
+
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -translate-y-16 translate-x-16 group-hover:bg-primary/40 transition-all duration-500 group-hover:scale-150" />
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-chart-2/20 rounded-full blur-2xl translate-y-12 -translate-x-12 group-hover:bg-chart-2/40 transition-all duration-500" />
+                  </Card>
+                </AnimatedCard>
+              ))}
+            </div>
+          </div>
+
+          <AnimatedSection className="text-center mb-12 mt-16">
+            <h3 className="font-display text-3xl md:text-4xl font-bold mb-4">
+              More <span className="text-primary">Projects</span>
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Additional work showcasing versatility across different technologies and platforms.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.filter(p => !p.featured).map((project, index) => (
+              <AnimatedCard key={project.id} index={index} delay={0.2}>
+                <Card
+                  className="group relative overflow-hidden border-primary/20 hover:border-primary/40 hover:-translate-y-2 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 h-full bg-card/50 backdrop-blur-sm"
+                  data-testid={`card-project-${project.id}`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-chart-2/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="relative p-6 flex flex-col h-full">
+                    {project.category && (
+                      <Badge variant="outline" className="mb-3 text-[10px] border-primary/40 text-primary capitalize w-fit" data-testid={`badge-category-${project.id}`}>
+                        {project.category.replace('-', ' ')}
+                      </Badge>
+                    )}
+                    <div className="flex items-center gap-3 mb-4">
+                      <motion.div 
+                        className="p-2 bg-primary/10 rounded-lg border border-primary/20 group-hover:bg-primary/20 transition-colors"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                      >
+                        <Server className="w-5 h-5 text-primary" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <h3 className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors" data-testid={`text-project-title-${project.id}`}>
+                          {project.title}
+                        </h3>
+                        <p className="text-xs text-chart-1 font-medium">{project.subtitle}</p>
+                      </div>
+                    </div>
+
+                    <p className="text-foreground/80 mb-4 leading-relaxed flex-grow text-sm">
+                      {project.description}
+                    </p>
+
+                    {project.metrics && (
+                      <div className="grid grid-cols-3 gap-3 mb-4 p-3 bg-background/50 rounded-lg border border-primary/10">
+                        {project.metrics.map((metric, idx) => (
+                          <div key={idx} className="text-center group/metric" data-testid={`metric-${project.id}-${idx}`}>
+                            <div className={`font-mono font-bold text-sm ${metric.color || "text-primary"} group-hover/metric:scale-110 transition-transform`}>
+                              {metric.value}
+                            </div>
+                            <div className="text-[10px] text-muted-foreground mt-0.5 leading-tight">{metric.label}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="flex flex-wrap gap-2">
+                      {project.techStack.map((tech, idx) => (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: idx * 0.05 }}
+                          viewport={{ once: true }}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                        >
+                          <Badge variant="secondary" className="font-mono text-[10px] border border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 transition-colors" data-testid={`badge-tech-${project.id}-${idx}`}>
+                            {tech}
+                          </Badge>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-primary/20 rounded-full blur-2xl -translate-y-12 translate-x-12 group-hover:bg-primary/30 transition-all duration-500" />
+                </Card>
               </AnimatedCard>
             ))}
           </div>
