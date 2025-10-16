@@ -58,14 +58,48 @@ The optimized files will be in the `dist` directory.
 
 ## Deployment
 
-### GitHub Pages
+### GitHub Pages (Recommended)
 
-1. Build the project:
+This project is pre-configured for instant GitHub Pages deployment. The `docs/` folder contains a production-ready build.
+
+**Quick Deploy:**
+
+1. Create a new repository on GitHub (or use an existing one)
+
+2. Push this code to GitHub:
    ```bash
-   npm run build
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+   git push -u origin main
    ```
 
-2. Deploy the `dist` folder to GitHub Pages
+3. Enable GitHub Pages:
+   - Go to your repository on GitHub
+   - Click **Settings** > **Pages**
+   - Under **Source**, select **Deploy from a branch**
+   - Under **Branch**, select **main** and **/docs** folder
+   - Click **Save**
+
+4. Your site will be live at: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/`
+
+**Rebuilding for GitHub Pages:**
+
+If you make changes and need to rebuild:
+
+```bash
+./build-github.sh
+```
+
+This will regenerate the `docs/` folder with your latest changes. Then commit and push:
+
+```bash
+git add docs/
+git commit -m "Update build"
+git push
+```
 
 ### Vercel / Netlify
 
@@ -73,8 +107,8 @@ Simply connect your GitHub repository to Vercel or Netlify, and they will automa
 
 ### Manual Deployment
 
-1. Build the project
-2. Upload the contents of the `dist` folder to your web server
+1. Run the build script: `./build-github.sh`
+2. Upload the contents of the `docs/` folder to your web server
 3. Configure your server to serve the `index.html` file for all routes
 
 ## Project Structure

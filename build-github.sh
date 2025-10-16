@@ -27,9 +27,10 @@ cat > docs/404.html << 'EOF'
     <title>Redirecting...</title>
     <script>
       // This script redirects 404s to index.html for client-side routing
+      // Use relative path to preserve repo prefix on GitHub Pages
       sessionStorage.redirect = location.href;
     </script>
-    <meta http-equiv="refresh" content="0;URL='/'">
+    <meta http-equiv="refresh" content="0;URL='index.html'">
   </head>
   <body>
   </body>
