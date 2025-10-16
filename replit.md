@@ -10,6 +10,13 @@ This portfolio serves as a comprehensive showcase of MacMoment's technical exper
 - Modern web development capabilities (this portfolio)
 
 ## Recent Changes
+- **2025-10-16**: GitHub Pages deployment configuration
+  - Configured hash-based routing (wouter useHashLocation) for GitHub Pages compatibility
+  - Created build-github.sh script for one-command deployment builds
+  - Set up docs/ folder with .nojekyll and 404.html for proper SPA routing
+  - Configured relative asset paths (--base=./) for GitHub Pages project URLs
+  - Portfolio now works seamlessly at username.github.io/repo-name/#/
+
 - **2025-10-16**: Initial portfolio creation with dark cyberpunk theme
   - Configured custom design tokens with neon cyan/purple accents
   - Built Hero section with animated gradient background
@@ -22,9 +29,10 @@ This portfolio serves as a comprehensive showcase of MacMoment's technical exper
 - **Frontend**: React SPA with TypeScript
 - **Styling**: Tailwind CSS with custom design system
 - **UI Components**: shadcn/ui (Radix primitives)
-- **Routing**: Wouter for client-side routing
+- **Routing**: Wouter with hash-based routing (GitHub Pages compatible)
 - **Animations**: CSS animations with custom keyframes
-- **Backend**: Express.js for serving static files
+- **Backend**: Express.js for serving static files (development only)
+- **Deployment**: Static build in docs/ folder for GitHub Pages
 
 ## Key Features
 1. **Smooth Scroll Navigation**: Single-page app with anchor-based navigation
@@ -61,4 +69,19 @@ This portfolio serves as a comprehensive showcase of MacMoment's technical exper
 - Discord: @MacMoment
 
 ## Deployment
-Ready for GitHub Pages, Vercel, or Netlify deployment. Simply build with `npm run build` and deploy the `dist` folder.
+
+### GitHub Pages (Configured)
+The portfolio is pre-configured for instant GitHub Pages deployment:
+- Run `./build-github.sh` to build for GitHub Pages
+- Built files are output to `docs/` folder
+- Uses hash-based routing (/#/) for compatibility
+- Includes .nojekyll and 404.html for SPA support
+
+**Quick Deploy:**
+1. Push to GitHub
+2. Enable GitHub Pages: Settings → Pages → Deploy from main branch /docs folder
+3. Site will be live at: `https://USERNAME.github.io/REPO-NAME/#/`
+
+### Other Platforms
+- **Vercel/Netlify**: Auto-detects Vite config
+- **Manual**: Build with `npm run build` and deploy `dist/` folder
