@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-      // This script redirects 404s to index.html for client-side routing
-      // Use relative path to preserve repo prefix on GitHub Pages
-      sessionStorage.redirect = location.href;
+      // Simple redirect for single-page portfolio
+      // This portfolio only has one route (/) so all 404s go there
+      window.location.replace('./index.html#/');
     </script>
-    <meta http-equiv="refresh" content="0;URL='index.html'">
   </head>
   <body>
+    <p>Redirecting to portfolio...</p>
   </body>
 </html>

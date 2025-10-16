@@ -83,7 +83,9 @@ This project is pre-configured for instant GitHub Pages deployment. The `docs/` 
    - Under **Branch**, select **main** and **/docs** folder
    - Click **Save**
 
-4. Your site will be live at: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/`
+4. Your site will be live at: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/#/`
+
+   **Note:** The portfolio uses hash-based routing (`#/`) to work seamlessly across all hosting platforms, including GitHub Pages project sites.
 
 **Rebuilding for GitHub Pages:**
 

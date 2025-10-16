@@ -18,7 +18,7 @@ cp -r dist/public/* docs/
 echo "Creating .nojekyll file..."
 touch docs/.nojekyll
 
-# Create 404.html for client-side routing support
+# Create 404.html for client-side routing support with hash routing
 echo "Creating 404.html for SPA routing..."
 cat > docs/404.html << 'EOF'
 <!DOCTYPE html>
@@ -27,13 +27,13 @@ cat > docs/404.html << 'EOF'
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-      // This script redirects 404s to index.html for client-side routing
-      // Use relative path to preserve repo prefix on GitHub Pages
-      sessionStorage.redirect = location.href;
+      // Simple redirect for single-page portfolio
+      // This portfolio only has one route (/) so all 404s go there
+      window.location.replace('./index.html#/');
     </script>
-    <meta http-equiv="refresh" content="0;URL='index.html'">
   </head>
   <body>
+    <p>Redirecting to portfolio...</p>
   </body>
 </html>
 EOF
@@ -48,4 +48,4 @@ echo "3. Under 'Source', select 'Deploy from a branch'"
 echo "4. Under 'Branch', select 'main' and '/docs' folder"
 echo "5. Click Save"
 echo ""
-echo "Your site will be live at: https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/"
+echo "Your site will be live at: https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/#/"
