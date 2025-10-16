@@ -93,13 +93,15 @@ If you make changes and need to rebuild:
 ./build-github.sh
 ```
 
-This will regenerate the `docs/` folder with your latest changes. Then commit and push:
+This script builds the project with relative asset paths (required for GitHub Pages) and regenerates the `docs/` folder. Then commit and push:
 
 ```bash
 git add docs/
 git commit -m "Update build"
 git push
 ```
+
+**Note:** The build script uses `--base=./` to create relative asset paths, ensuring your portfolio works correctly on GitHub Pages project URLs (`username.github.io/repo-name/`).
 
 ### Vercel / Netlify
 

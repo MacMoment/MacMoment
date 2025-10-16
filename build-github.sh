@@ -3,8 +3,9 @@
 # Build the project for GitHub Pages deployment
 echo "Building project for GitHub Pages..."
 
-# Run the vite build
-npm run build
+# Build with relative base path for GitHub Pages
+# This ensures assets load correctly on project pages (username.github.io/repo-name/)
+npx vite build --base=./
 
 # Create docs directory if it doesn't exist
 mkdir -p docs
