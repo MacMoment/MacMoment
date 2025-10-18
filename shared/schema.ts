@@ -6,7 +6,7 @@ export interface Project {
   subtitle: string;
   description: string;
   techStack: string[];
-  category?: "anti-cheat" | "plugin" | "infrastructure" | "web" | "ai";
+  category?: "anti-cheat" | "plugin" | "infrastructure" | "web" | "ai" | "bot" | "mod";
   metrics?: {
     label: string;
     value: string;
@@ -27,7 +27,7 @@ export const projectSchema = z.object({
   subtitle: z.string(),
   description: z.string(),
   techStack: z.array(z.string()),
-  category: z.enum(["anti-cheat", "plugin", "infrastructure", "web", "ai"]).optional(),
+  category: z.enum(["anti-cheat", "plugin", "infrastructure", "web", "ai", "bot", "mod"]).optional(),
   metrics: z.array(z.object({
     label: z.string(),
     value: z.string(),

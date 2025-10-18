@@ -93,6 +93,48 @@ const projects: Project[] = [
     ],
     featured: false,
   },
+  {
+    id: "applibot",
+    title: "AppliBot",
+    subtitle: "Custom Applications Discord Bot",
+    description: "Advanced Discord bot for managing server applications with custom forms, automated workflows, and admin review systems. Features embed builders and multi-stage approval processes.",
+    techStack: ["Python", "discord.py", "SQLite", "asyncio"],
+    category: "bot",
+    metrics: [
+      { label: "Servers", value: "50+", color: "text-chart-1" },
+      { label: "Applications", value: "10K+", color: "text-chart-3" },
+      { label: "Uptime", value: "99.8%", color: "text-chart-2" },
+    ],
+    featured: false,
+  },
+  {
+    id: "ticketmaster",
+    title: "TicketMaster",
+    subtitle: "Advanced Ticket System Bot",
+    description: "Professional support ticket system for Discord with category-based routing, priority queues, transcript generation, and comprehensive analytics dashboard for server moderation.",
+    techStack: ["Python", "discord.py", "PostgreSQL", "Redis"],
+    category: "bot",
+    metrics: [
+      { label: "Active Users", value: "25K+", color: "text-chart-1" },
+      { label: "Tickets/Day", value: "500+", color: "text-chart-3" },
+      { label: "Avg Response", value: "<2min", color: "text-chart-2" },
+    ],
+    featured: false,
+  },
+  {
+    id: "velocityx",
+    title: "VelocityX",
+    subtitle: "Performance Enhancement Mod",
+    description: "Minecraft Forge mod that optimizes chunk loading, reduces lag, and enhances frame rates through advanced memory management and rendering optimizations for smoother gameplay.",
+    techStack: ["Java", "Forge API", "Mixins", "ASM"],
+    category: "mod",
+    metrics: [
+      { label: "FPS Boost", value: "+40%", color: "text-chart-3" },
+      { label: "Downloads", value: "100K+", color: "text-chart-1" },
+      { label: "Versions", value: "1.16-1.20", color: "text-chart-2" },
+    ],
+    featured: false,
+  },
 ];
 
 const skills: Skill[] = [
